@@ -37,26 +37,101 @@ Nhập : git add README.md
 Nhập : git commit -m "feat: add feature B"
 Nhập : git diff feature-a feature-b
 
-Bài 4 : 
-Bước 1 — Merge feature-a vào main
-Nhập : git switch main
-Nhập : git switch main
-Nhập : git merge feature-a
+Bài 4: Merge branch
 
-Nhập : git log --graph --all --oneline
+Bước 1 — Chuyển sang main
+Nhập:
+git switch main
+
+Bước 2 — Merge feature-a vào main
+Nhập:
+git merge feature-a
+
+Bước 3 — Xem lịch sử commit
+Nhập:
+git log --graph --all --oneline
 
 Giải thích:
 Biểu đồ thể hiện lịch sử commit của tất cả các branch.
-feature-a đã được merge vào main theo kiểu Fast-forward nên main
-và feature-a cùng trỏ tới commit feat: add feature A.
-Branch feature-b vẫn chứa commit riêng feat: add feature B và
-chưa được merge vào main.
 
-Bài 5 :
-Phần A — Tạo commit để PUSH rồi REVERT
+feature-a đã được merge vào main theo kiểu Fast-forward nên
+main và feature-a cùng trỏ tới commit "feat: add feature A".
 
-Bước 1 — Thêm một dòng
-Nhập : echo "Commit to revert" >> README.md
-Nhập : git add README.md
+Branch feature-b vẫn chứa commit riêng "feat: add feature B"
+và chưa được merge vào main.
 
-Nhập : git commit -m "test: add commit for revert"
+Bài 5: Sử dụng git revert và git reset
+
+PHẦN A – Tạo commit → PUSH → REVERT
+
+Bước 1 – Tạo thay đổi
+Nhập:
+echo "Commit to revert" >> README.md
+
+Bước 2 – Add file
+Nhập:
+git add README.md
+
+Bước 3 – Commit
+Nhập:
+git commit -m "test: add commit for revert"
+
+Bước 4 – Push lên GitHub
+Nhập:
+git push -u origin main
+
+Bước 5 – Kiểm tra lịch sử commit
+Nhập:
+git log --oneline -3
+
+Bước 6 – Revert commit cuối
+Nhập:
+git revert HEAD --no-edit
+
+Giải thích:
+git revert tạo một commit mới để đảo ngược thay đổi của commit trước đó.
+Không xóa lịch sử commit cũ.
+
+Bước 7 – Push commit revert lên GitHub
+Nhập:
+git push
+
+Bước 8 – Kiểm tra
+Nhập:
+git log --oneline -4
+
+
+PHẦN B – Tạo commit LOCAL → RESET
+
+Bước 1 – Tạo thay đổi mới
+Nhập:
+echo "Commit local" >> README.md
+
+Bước 2 – Add
+Nhập:
+git add README.md
+
+Bước 3 – Commit local
+Nhập:
+git commit -m "test: local commit"
+
+Bước 4 – Kiểm tra lịch sử
+Nhập:
+git log --oneline -3
+
+Bước 5 – Reset về commit trước
+Nhập:
+git reset --hard HEAD~1
+
+Bước 6 – Kiểm tra lại
+Nhập:
+git log --oneline -3
+
+Giải thích:
+git reset --hard HEAD~1 đưa HEAD và branch về commit trước đó
+và xóa thay đổi của commit local trong working directory.
+
+Lưu ý:
+- git revert: an toàn khi commit đã PUSH lên GitHub.
+- git reset: thường dùng khi commit chưa PUSH.
+- Không nên dùng reset để thay đổi lịch sử đã chia sẻ trên GitHub.
