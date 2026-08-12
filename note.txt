@@ -1,0 +1,62 @@
+Bài 1 : 1. Liệt kê branch và tạo 2 branch mới nhưng không chuyển branch
+
+Bước 1 : Liệt kê branch
+Nhập ở terminal: git branch
+
+Bước 2 — Tạo branch thứ nhất
+Nhập ở terminal: git branch feature-a
+
+Bước 3 — Tạo branch thứ hai
+Nhập ở terminal: git branch feature-b
+
+Bước 4 — Kiểm tra
+Nhập ở terminal: git branch
+
+Bài 2.  Viết 5 commit message theo Conventional Commits
+5 commit message: 
+1. feat: add user registration form
+2. fix: correct email validation
+3. docs: update Git workflow guide
+4. style: improve homepage spacing
+5. refactor: simplify form validation logic
+
+Bài 3 Sử dụng git diff branch1 branch2 để so sánh hai branch đã diverged.
+
+1.Tạo thay đổi riêng cho feature-a
+Nhập : echo "Feature A" >> README.md
+
+2. Commit 
+Nhập : git add README.md
+       git commit -m "feat: add feature A"
+
+Chuyển sang branch feature-b:
+
+Nhập : git switch feature-b
+Nhập : echo "Feature B" >> README.md
+Nhập : git add README.md
+Nhập : git commit -m "feat: add feature B"
+Nhập : git diff feature-a feature-b
+
+Bài 4 : 
+Bước 1 — Merge feature-a vào main
+Nhập : git switch main
+Nhập : git switch main
+Nhập : git merge feature-a
+
+Nhập : git log --graph --all --oneline
+
+Giải thích:
+Biểu đồ thể hiện lịch sử commit của tất cả các branch.
+feature-a đã được merge vào main theo kiểu Fast-forward nên main
+và feature-a cùng trỏ tới commit feat: add feature A.
+Branch feature-b vẫn chứa commit riêng feat: add feature B và
+chưa được merge vào main.
+
+Bài 5 :
+Phần A — Tạo commit để PUSH rồi REVERT
+
+Bước 1 — Thêm một dòng
+Nhập : echo "Commit to revert" >> README.md
+Nhập : git add README.md
+
+Nhập : git commit -m "test: add commit for revert"
